@@ -96,8 +96,8 @@ for norm_first, bg_method in product(cfg.seed.norm_firsts, cfg.seed.bg_methods):
 
         # ** CAM插值到原图大小。
         cam = resize_cam_cuda(cam, (ori_h, ori_w))
-        print(cam.max(), cam.min())
-        print(fg_cls.shape)
+        print(img_id)
+
 
         # * 读取SAM标注，并计算种子点。
         if osp.isfile(anns_file := osp.join(cfg.sam_anns.dir, f'{img_id}.pkl')):
