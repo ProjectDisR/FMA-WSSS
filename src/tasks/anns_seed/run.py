@@ -114,6 +114,8 @@ for norm_first, bg_method in product(cfg.seed.norm_firsts, cfg.seed.bg_methods):
         # fg_cls = torch.from_numpy(fg_cls).cuda()
         # cam = torch.from_numpy(cam).cuda()
 
+        print(cam.dtype)
+        print(fg_cls.dtype)
         # * 读取SAM标注，并计算种子点。
         if osp.isfile(anns_file := osp.join(cfg.sam_anns.dir, f'{img_id}.pkl')):
             with open(anns_file, 'rb') as f:
@@ -136,7 +138,7 @@ for norm_first, bg_method in product(cfg.seed.norm_firsts, cfg.seed.bg_methods):
         # * 保存优化后种子点。
         arr2PIL(seed).save(osp.join(seed_dir, f'{img_id}.png'))
 
-        print(seed.shape, seed.dtype, type(seed))
+
 
         # * 可视化。
         if cfg.viz.enable:
