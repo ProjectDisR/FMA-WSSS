@@ -69,15 +69,11 @@ for norm_first, bg_method in product(cfg.seed.norm_firsts, cfg.seed.bg_methods):
     print(f'当前参数设定为：norm_first: {rslt.params.norm_first}, bg_method: {rslt.params.bg_method}，开始生成种子...')
 
     # * 初始化保存目录。
-    rslt.seed_dir = seed_dir = CacheDir(osp.join(cfg.rslt_dir, 'seed'), '/tmp/anns_seed/seed', exist='delete')
+    rslt.seed_dir = seed_dir = osp.join(cfg.rslt_dir, 'seed')
 
     if cfg.viz.enable:
-        rslt.color_seed_dir = color_seed_dir = CacheDir(osp.join(cfg.rslt_dir, 'viz', 'color_seed'),
-                                                        '/tmp/anns_seed/color_seed',
-                                                        exist='delete')
-        rslt.img_cam_seed_dir = img_cam_seed_dir = CacheDir(osp.join(cfg.rslt_dir, 'viz', 'img_cam_seed'),
-                                                            '/tmp/anns_seed/img_cam_seed',
-                                                            exist='delete')
+        rslt.color_seed_dir = color_seed_dir = osp.join(cfg.rslt_dir, 'viz', 'color_seed')
+        rslt.img_cam_seed_dir = img_cam_seed_dir = osp.join(cfg.rslt_dir, 'viz', 'img_cam_seed')
 
     # * 遍历所有图片，生成优化后掩码并可视化。
     for idx, inp in tqdm(enumerate(dt), total=len(dt), dynamic_ncols=True, desc='生成', unit='张', miniters=10):
