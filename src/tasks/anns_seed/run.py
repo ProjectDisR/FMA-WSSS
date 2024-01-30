@@ -107,10 +107,8 @@ for norm_first, bg_method in product(cfg.seed.norm_firsts, cfg.seed.bg_methods):
 
             cam_ls.append(cam)
             fg_cls_ls.append(cls_)
-            print(cls_)
-            print(cam)
 
-        fg_cls = np.array(fg_cls)
+        fg_cls = np.array(fg_cls_ls)
         cam = np.stack(cam_ls, axis=0)
 
         fg_cls = torch.from_numpy(fg_cls).cuda()
