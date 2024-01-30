@@ -75,7 +75,7 @@ def gather_norm_bg_argmax(anns: SamAnns, cam: torch.Tensor, fg_cls: torch.Tensor
 
     # * 计算标注背景得分。
     anns_score = cat_bg_score_cuda(anns_fg_score, bg_method)  # (C+1, 1, S)
-    print(anns_fg_score.max(), anns_fg_score.min(), anns_fg_score.sum())
+    print(anns_score[0].max(), anns_score[0].min(), anns_score[0].sum())
 
     if ret_seeded_anns:
         anns.add_item('score', anns_score[:, 0, :].T)
