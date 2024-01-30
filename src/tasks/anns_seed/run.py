@@ -6,7 +6,7 @@
 @Time    : 2023/5/23 21:54
 @File    : run.py
 @Software: PyCharm
-@Desc    : 
+@Desc    :
 """
 import argparse
 import os
@@ -96,6 +96,8 @@ for norm_first, bg_method in product(cfg.seed.norm_firsts, cfg.seed.bg_methods):
 
         # ** CAM插值到原图大小。
         cam = resize_cam_cuda(cam, (ori_h, ori_w))
+        print(cam)
+        print(fg_cls)
 
         # * 读取SAM标注，并计算种子点。
         if osp.isfile(anns_file := osp.join(cfg.sam_anns.dir, f'{img_id}.pkl')):
