@@ -75,7 +75,6 @@ def gather_norm_bg_argmax(anns: SamAnns, cam: torch.Tensor, fg_cls: torch.Tensor
 
     # * 计算标注背景得分。
     anns_score = cat_bg_score_cuda(anns_fg_score, bg_method)  # (C+1, 1, S)
-    print(anns_score.shape)
 
     if ret_seeded_anns:
         anns.add_item('score', anns_score[:, 0, :].T)
@@ -84,6 +83,7 @@ def gather_norm_bg_argmax(anns: SamAnns, cam: torch.Tensor, fg_cls: torch.Tensor
 
     # * 得到标注种子点。
     anns_seed = idx2seed_cuda(anns_max_idx, fg_cls)  # (1, S)
+    print(anns_seed)
     anns.add_item('seed', anns_seed[0].tolist())
 
     # * 以得分为标注置信度。
