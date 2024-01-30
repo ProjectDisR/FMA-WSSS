@@ -96,7 +96,7 @@ for norm_first, bg_method in product(cfg.seed.norm_firsts, cfg.seed.bg_methods):
 
         # ** CAM插值到原图大小。
         cam = resize_cam_cuda(cam, (ori_h, ori_w))
-        print(cam.shape)
+        print(cam.max(), cam.min())
         print(fg_cls.shape)
 
         # * 读取SAM标注，并计算种子点。
