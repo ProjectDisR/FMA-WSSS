@@ -207,3 +207,5 @@ for rslt in results:
           f'mIoU: {rslt.metric.mIoU:.4f}')
 print(f'最优参数设定为：norm_first: {max_rslt.params.norm_first}, bg_method: {max_rslt.params.bg_method}，'
       f'mIoU: {max_rslt.metric.mIoU:.4f}')
+
+print('f=======================')
