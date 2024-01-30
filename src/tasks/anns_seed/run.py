@@ -143,7 +143,6 @@ for norm_first, bg_method in product(cfg.seed.norm_firsts, cfg.seed.bg_methods):
         if cfg.viz.enable:
             color_seed = label_map2color_map(seed)
             arr2PIL(color_seed, order='RGB').save(osp.join(color_seed_dir, f'{img_id}.png'))
-            break
 
         if cfg.viz.enable and (idx % cfg.viz.step == 0):
             fig.clf()
