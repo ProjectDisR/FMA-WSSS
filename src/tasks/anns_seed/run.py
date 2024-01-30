@@ -135,13 +135,13 @@ for norm_first, bg_method in product(cfg.seed.norm_firsts, cfg.seed.bg_methods):
 
         # * 保存优化后种子点。
         arr2PIL(seed).save(osp.join(seed_dir, f'{img_id}.png'))
-        print(seed)
+        print(seed.shape, seed.max(), seed.min())
 
         # * 可视化。
         if cfg.viz.enable:
             color_seed = label_map2color_map(seed)
             arr2PIL(color_seed, order='RGB').save(osp.join(color_seed_dir, f'{img_id}.png'))
-            print(color_seed)
+            print(color_seed.shape, color_seed.max(), color_seed.min())
             break
 
         if cfg.viz.enable and (idx % cfg.viz.step == 0):
