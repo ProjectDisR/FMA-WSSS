@@ -1,0 +1,62 @@
+RAND_SEED: 0
+
+EXP:
+    ID: CE种,co预,b二分
+    OUTPUT_DIR: experiment/others/deeplab-pytorch
+
+DATASET:
+    NAME: vocaug
+    ROOT: datasets
+    MASK_PATH: experiment/others/CLIP-ES/crf-baseline/2023-02-10--11-51-23
+    LABELS: others/deeplab-pytorch/data/datasets/voc12/labels.txt
+    N_CLASSES: 21
+    IGNORE_LABEL: 255
+    SCALES: [0.5, 0.75, 1.0, 1.25, 1.5]
+    SPLIT:
+        TRAIN: train_aug
+        VAL: val
+        TEST: test
+
+DATALOADER:
+    NUM_WORKERS: 12  # 改为12。
+
+IMAGE:
+    MEAN:
+        R: 122.675
+        G: 116.669
+        B: 104.008
+    SIZE:
+        BASE: # None
+        TRAIN: 321
+        TEST: 513
+
+MODEL:
+    NAME: DeepLabV2_ResNet101_MSC
+    N_BLOCKS: [3, 4, 23, 3]
+    ATROUS_RATES: [6, 12, 18, 24]
+    INIT_MODEL: pretrains/others/deeplab-pytorch/coco/deeplabv1_resnet101/caffemodel/deeplabv1_resnet101-coco.pth
+
+SOLVER:
+    BATCH_SIZE:  # 本来是5x2，改为10x1。
+        TRAIN: 5
+        TEST: 1
+    ITER_MAX: 20000
+    ITER_SIZE: 2
+    ITER_SAVE: 5000
+    ITER_TB: 100
+    LR_DECAY: 10
+    # LR = 1e-3 / 4。4个loss是相加，这里再除4，相当于平均了四个loss——即无论每张图算出的有loss多少，该图带来的更新强度大致不变。
+    LR: 2.5e-4
+    MOMENTUM: 0.9
+    OPTIMIZER: sgd
+    POLY_POWER: 0.9
+    WEIGHT_DECAY: 5.0e-4
+    AVERAGE_LOSS: 20
+
+CRF:
+    ITER_MAX: 10
+    POS_W: 3
+    POS_XY_STD: 1
+    BI_W: 4
+    BI_XY_STD: 67
+    BI_RGB_STD: 3
