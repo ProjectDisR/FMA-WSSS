@@ -116,6 +116,7 @@ if __name__ == '__main__':
 
         # * 优化CAM。
         cam_affed = cfg.aff.cal(att, ori_cam).cpu().numpy()
+        print(cam_affed.shape, cam_affed.max(), cam_affed.min())
 
         # * 保存cam_affed。
         np.savez(osp.join(cam_affed_cache_dir, f'{img_id}.npz'),
