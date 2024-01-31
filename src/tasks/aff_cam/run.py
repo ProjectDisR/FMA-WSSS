@@ -35,6 +35,9 @@ from utils.cache_dir import CacheDir
 from utils.eval_cams import search_and_eval
 from utils.resize import resize_cam
 
+
+import torch.nn.functional as F
+
 mp.set_start_method('spawn', force=True)
 
 if __name__ == '__main__':
@@ -106,17 +109,27 @@ if __name__ == '__main__':
         loaded = np.load(cam_file)
         ori_cam = torch.from_numpy(loaded['cam'].astype(np.float32)).to(device)  # PHW
         fg_cls = loaded['fg_cls'].astype(np.uint8)
+
+        cam_dict = np.load(f'/home/vllcslinv100/repos/SemPLeS/semples3_0.02_0.05_2/voc/attn-patchrefine-npy-ms/{img_id}.npy', allow_pickle=True)
+        cam_dict = cam_dict.item()
+
+        cam_ls = []
+        fg_cls_ls = []
+
+        for fg_cls_, cam in cam_dict.items():
+
+            cam_ls.append(cam)
+            fg_cls_ls.append(fg_cls_)
+
+        ori_cam = F.interpolate(torch.from_numpy(np.stack(cam_ls, axis=0)), size=(ori_cam.shape[1], ori_cam.shape[2]), mode='bilinear', align_corners=False).to(device)
+        fg_cls = np.array(fg_cls_ls).astype(np.uint8)
+
         fg_logit = loaded['fg_logit'].astype(np.float32)
         all_logit = loaded['all_logit'].astype(np.float32)
         att = torch.from_numpy(loaded['att'].astype(np.float32)).to(device)  # DHL
 
-        print(cam_file)
-        print(ori_cam.shape, ori_cam.max(), ori_cam.min())
-        print(fg_cls.shape)
-
         # * 优化CAM。
         cam_affed = cfg.aff.cal(att, ori_cam).cpu().numpy()
-        print(att.shape, att.max(), att.min())
 
         # * 保存cam_affed。
         np.savez(osp.join(cam_affed_cache_dir, f'{img_id}.npz'),
