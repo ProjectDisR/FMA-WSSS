@@ -6,7 +6,7 @@
 @Time    : 2023/3/27 22:18
 @File    : run.py
 @Software: PyCharm
-@Desc    : 
+@Desc    :
 """
 import argparse
 import multiprocessing as mp
@@ -109,6 +109,10 @@ if __name__ == '__main__':
         fg_logit = loaded['fg_logit'].astype(np.float32)
         all_logit = loaded['all_logit'].astype(np.float32)
         att = torch.from_numpy(loaded['att'].astype(np.float32)).to(device)  # DHL
+
+        print(cam_file)
+        print(ori_cam.shape, ori_cam.max(), ori_cam.min())
+        print(fg_cls.shape)
 
         # * 优化CAM。
         cam_affed = cfg.aff.cal(att, ori_cam).cpu().numpy()
