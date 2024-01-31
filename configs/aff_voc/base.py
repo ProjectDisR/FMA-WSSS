@@ -24,7 +24,7 @@ cfg.rslt_dir = ...
 # * 设定数据集。
 # ** 设定验证集。
 cfg.dt.val.ini.cls_labels_type = 'seg_cls_labels'
-cfg.dt.val.ini.split = 'train'
+cfg.dt.val.ini.split = 'train_aug'
 cfg.dt.val.dt = IL(lambda c:
                    VOCAug2(root='datasets', **c.dt.val.ini),
                    priority=-1)
