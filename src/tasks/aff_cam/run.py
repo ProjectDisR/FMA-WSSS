@@ -127,6 +127,7 @@ if __name__ == '__main__':
 
         fg_logit = loaded['fg_logit'].astype(np.float32)
         all_logit = loaded['all_logit'].astype(np.float32)
+        print( fg_logit, all_logit)
         att = torch.from_numpy(loaded['att'].astype(np.float32)).to(device)  # DHL
 
         # * 优化CAM。
