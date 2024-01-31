@@ -109,6 +109,8 @@ if __name__ == '__main__':
         loaded = np.load(cam_file)
         ori_cam = torch.from_numpy(loaded['cam'].astype(np.float32)).to(device)  # PHW
         fg_cls = loaded['fg_cls'].astype(np.uint8)
+        fg_logit = loaded['fg_logit'].astype(np.float32)
+        all_logit = loaded['all_logit'].astype(np.float32)
 
         cam_dict = np.load(f'/home/vllcslinv100/repos/SemPLeS/semples3_0.02_0.05_2/voc/attn-patchrefine-npy-ms/{img_id}.npy', allow_pickle=True)
         cam_dict = cam_dict.item()
@@ -124,10 +126,8 @@ if __name__ == '__main__':
         ori_cam = F.interpolate(torch.from_numpy(np.stack(cam_ls, axis=0)).unsqueeze(1), size=(ori_cam.shape[1], ori_cam.shape[2]), mode='bilinear', align_corners=False).to(device)
         ori_cam = ori_cam.squeeze(1)
         fg_cls = np.array(fg_cls_ls).astype(np.uint8)
+        fg_logit = fg_logit[fg_cls]
 
-        fg_logit = loaded['fg_logit'].astype(np.float32)
-        all_logit = loaded['all_logit'].astype(np.float32)
-        print( fg_logit, all_logit)
         att = torch.from_numpy(loaded['att'].astype(np.float32)).to(device)  # DHL
 
         # * 优化CAM。
