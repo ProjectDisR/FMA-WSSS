@@ -126,7 +126,7 @@ if __name__ == '__main__':
         ori_cam = F.interpolate(torch.from_numpy(np.stack(cam_ls, axis=0)).unsqueeze(1), size=(ori_cam.shape[1], ori_cam.shape[2]), mode='bilinear', align_corners=False).to(device)
         ori_cam = ori_cam.squeeze(1)
         fg_cls = np.array(fg_cls_ls).astype(np.uint8)
-        fg_logit = fg_logit[fg_cls]
+        fg_logit = all_logit[fg_cls]
 
         att = torch.from_numpy(loaded['att'].astype(np.float32)).to(device)  # DHL
 
