@@ -53,7 +53,7 @@ cfg.solver.viz_step = 100
 # * 设定eval方法。
 cfg.eval.enabled = True
 cfg.eval.seed.cal = seed_argmax_cuda
-cfg.eval.seed.bg_methods = [{'method': 'pow', 'pow': p} for p in range(1, 4)]
+cfg.eval.seed.bg_methods = [{'method': 'pow', 'pow': p} for p in [0.8, 0.7, 0.5, 0.3]]
 cfg.eval.seed.ini.resize_first = True  # 先阈值+归一化，还是先resize。
 cfg.eval.seed.crf = None  # 可调
 cfg.eval.seed.save = None
