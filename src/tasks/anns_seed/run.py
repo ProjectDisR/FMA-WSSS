@@ -6,7 +6,7 @@
 @Time    : 2023/5/23 21:54
 @File    : run.py
 @Software: PyCharm
-@Desc    :
+@Desc    : 
 """
 import argparse
 import os
@@ -97,24 +97,6 @@ for norm_first, bg_method in product(cfg.seed.norm_firsts, cfg.seed.bg_methods):
         # ** CAM插值到原图大小。
         cam = resize_cam_cuda(cam, (ori_h, ori_w))
 
-        cam_dict = np.load(f'/home/vllcslinv100/repos/SemPLeS/semples3_0.02_0.05_2/voc/attn-patchrefine-npy-ms/{img_id}.npy', allow_pickle=True)
-        cam_dict = cam_dict.item()
-
-        cam_ls = []
-        fg_cls_ls = []
-
-        for cls_, cam in cam_dict.items():
-
-            cam_ls.append(cam)
-            fg_cls_ls.append(cls_)
-
-        fg_cls = np.array(fg_cls_ls).astype(np.uint8)
-        cam = np.stack(cam_ls, axis=0)
-
-        fg_cls = torch.from_numpy(fg_cls).cuda()
-        cam = torch.from_numpy(cam).cuda()
-
-
         # * 读取SAM标注，并计算种子点。
         if osp.isfile(anns_file := osp.join(cfg.sam_anns.dir, f'{img_id}.pkl')):
             with open(anns_file, 'rb') as f:
@@ -136,8 +118,6 @@ for norm_first, bg_method in product(cfg.seed.norm_firsts, cfg.seed.bg_methods):
 
         # * 保存优化后种子点。
         arr2PIL(seed).save(osp.join(seed_dir, f'{img_id}.png'))
-
-
 
         # * 可视化。
         if cfg.viz.enable:
