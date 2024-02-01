@@ -6,7 +6,7 @@
 @Time    : 2023/5/25 16:05
 @File    : cfg.py
 @Software: PyCharm
-@Desc    : 
+@Desc    :
 """
 from alchemy_cat.py_tools import Config
 
@@ -14,7 +14,7 @@ cfg = config = Config('configs/anns_seed/base.py')
 
 cfg.rslt_dir = ...
 
-cfg.dt.ini.split = 'train_aug'
+cfg.dt.ini.split = 'train'
 
 # * 配置CAM路径。
 cfg.cam.dir = 'experiment/VOC/seg/infer/final/affx2,at_cam,attx1,·5thresh/cam_affed'
