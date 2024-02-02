@@ -85,34 +85,34 @@ for norm_first, bg_method in product(cfg.seed.norm_firsts, cfg.seed.bg_methods):
         ori_h, ori_w = img.shape[:2]
 
         # * 读取CAM和前景类别。
-        # if cfg.cam.loader:
-        #     cam, fg_cls = cfg.cam.loader.cal(cfg.cam.dir, img_id)
-        #     cam = torch.as_tensor(cam, dtype=torch.float32, device=device)  # PHW
-        #     fg_cls = torch.as_tensor(fg_cls, dtype=torch.uint8, device=device)  # P
-        # else:
-        #     loaded = np.load(osp.join(cfg.cam.dir, f'{img_id}.npz'))
-        #     cam = torch.as_tensor(loaded['cam'], dtype=torch.float32, device=device)  # PHW
-        #     fg_cls = torch.as_tensor(loaded['fg_cls'], dtype=torch.uint8, device=device)  # P
+        if cfg.cam.loader:
+            cam, fg_cls = cfg.cam.loader.cal(cfg.cam.dir, img_id)
+            cam = torch.as_tensor(cam, dtype=torch.float32, device=device)  # PHW
+            fg_cls = torch.as_tensor(fg_cls, dtype=torch.uint8, device=device)  # P
+        else:
+            loaded = np.load(osp.join(cfg.cam.dir, f'{img_id}.npz'))
+            cam = torch.as_tensor(loaded['cam'], dtype=torch.float32, device=device)  # PHW
+            fg_cls = torch.as_tensor(loaded['fg_cls'], dtype=torch.uint8, device=device)  # P
 
-        # # ** CAM插值到原图大小。
-        # cam = resize_cam_cuda(cam, (ori_h, ori_w))
+        # ** CAM插值到原图大小。
+        cam = resize_cam_cuda(cam, (ori_h, ori_w))
 
-        cam_dict = np.load(f'/home/vllcslinv100/repos/SemPLeS/semples3_0.02_0.05_2/voc/attn-patchrefine-npy-ms/{img_id}.npy', allow_pickle=True)
-        cam_dict = cam_dict.item()
+        # cam_dict = np.load(f'/home/vllcslinv100/repos/SemPLeS/semples3_0.02_0.05_2/voc/attn-patchrefine-npy-ms/{img_id}.npy', allow_pickle=True)
+        # cam_dict = cam_dict.item()
 
-        cam_ls = []
-        fg_cls_ls = []
+        # cam_ls = []
+        # fg_cls_ls = []
 
-        for cls_, cam in cam_dict.items():
+        # for cls_, cam in cam_dict.items():
 
-            cam_ls.append(cam)
-            fg_cls_ls.append(cls_)
+        #     cam_ls.append(cam)
+        #     fg_cls_ls.append(cls_)
 
-        fg_cls = np.array(fg_cls_ls).astype(np.uint8)
-        cam = np.stack(cam_ls, axis=0)
+        # fg_cls = np.array(fg_cls_ls).astype(np.uint8)
+        # cam = np.stack(cam_ls, axis=0)
 
-        fg_cls = torch.from_numpy(fg_cls).cuda()
-        cam = torch.from_numpy(cam).cuda()
+        # fg_cls = torch.from_numpy(fg_cls).cuda()
+        # cam = torch.from_numpy(cam).cuda()
 
 
 
