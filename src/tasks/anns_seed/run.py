@@ -85,14 +85,14 @@ for norm_first, bg_method in product(cfg.seed.norm_firsts, cfg.seed.bg_methods):
         ori_h, ori_w = img.shape[:2]
 
         # * 读取CAM和前景类别。
-        if cfg.cam.loader:
-            cam, fg_cls = cfg.cam.loader.cal(cfg.cam.dir, img_id)
-            cam = torch.as_tensor(cam, dtype=torch.float32, device=device)  # PHW
-            fg_cls = torch.as_tensor(fg_cls, dtype=torch.uint8, device=device)  # P
-        else:
-            loaded = np.load(osp.join(cfg.cam.dir, f'{img_id}.npz'))
-            cam = torch.as_tensor(loaded['cam'], dtype=torch.float32, device=device)  # PHW
-            fg_cls = torch.as_tensor(loaded['fg_cls'], dtype=torch.uint8, device=device)  # P
+        # if cfg.cam.loader:
+        #     cam, fg_cls = cfg.cam.loader.cal(cfg.cam.dir, img_id)
+        #     cam = torch.as_tensor(cam, dtype=torch.float32, device=device)  # PHW
+        #     fg_cls = torch.as_tensor(fg_cls, dtype=torch.uint8, device=device)  # P
+        # else:
+        #     loaded = np.load(osp.join(cfg.cam.dir, f'{img_id}.npz'))
+        #     cam = torch.as_tensor(loaded['cam'], dtype=torch.float32, device=device)  # PHW
+        #     fg_cls = torch.as_tensor(loaded['fg_cls'], dtype=torch.uint8, device=device)  # P
 
         # ** CAM插值到原图大小。
         cam = resize_cam_cuda(cam, (ori_h, ori_w))
