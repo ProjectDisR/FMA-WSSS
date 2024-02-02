@@ -27,4 +27,4 @@ cfg.sam_anns.dir = 'experiment/VOC/sams/split=train_aug/anns'
 
 # * 修改得分算法参数。
 cfg.seed.norm_firsts = [True]
-cfg.seed.bg_methods = [{'method': 'pow', 'pow': .7}]
+cfg.seed.bg_methods = [{'method': 'pow', 'pow': i} for i in [0.5, 1.0, 1.5, 2.0, 3.0]]
