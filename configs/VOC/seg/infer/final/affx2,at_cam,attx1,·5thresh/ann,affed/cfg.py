@@ -14,7 +14,7 @@ cfg = config = Config('configs/anns_seed/base.py')
 
 cfg.rslt_dir = ...
 
-cfg.dt.ini.split = 'train'
+cfg.dt.ini.split = 'train_aug'
 
 # * 配置CAM路径。
 cfg.cam.dir = 'experiment/VOC/seg/infer/final/affx2,at_cam,attx1,·5thresh/cam_affed'
@@ -27,4 +27,4 @@ cfg.sam_anns.dir = 'experiment/VOC/sams/split=train_aug/anns'
 
 # * 修改得分算法参数。
 cfg.seed.norm_firsts = [True]
-cfg.seed.bg_methods = [{'method': 'pow', 'pow': i} for i in [0.5, 1.0, 1.5, 2.0, 3.0]]
+cfg.seed.bg_methods = [{'method': 'pow', 'pow': i} for i in [0.1, 0.3, 0.5, 0.7, 0.9, 1.1]]
