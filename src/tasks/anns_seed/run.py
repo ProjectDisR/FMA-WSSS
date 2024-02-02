@@ -95,7 +95,7 @@ for norm_first, bg_method in product(cfg.seed.norm_firsts, cfg.seed.bg_methods):
         #     fg_cls = torch.as_tensor(loaded['fg_cls'], dtype=torch.uint8, device=device)  # P
 
         # ** CAM插值到原图大小。
-        cam = resize_cam_cuda(cam, (ori_h, ori_w))
+        # cam = resize_cam_cuda(cam, (ori_h, ori_w))
 
         # cam_dict = np.load(f'/home/vllcslinv100/repos/SemPLeS/semples3_0.02_0.05_2/voc/attn-patchrefine-npy-ms/{img_id}.npy', allow_pickle=True)
         # cam_dict = cam_dict.item()
