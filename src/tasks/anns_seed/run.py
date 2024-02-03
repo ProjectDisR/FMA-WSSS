@@ -97,7 +97,7 @@ for norm_first, bg_method in product(cfg.seed.norm_firsts, cfg.seed.bg_methods):
         # # ** CAM插值到原图大小。
         # cam = resize_cam_cuda(cam, (ori_h, ori_w))
 
-        cam_dict = np.load(f'/home/vllcslinv100/repos/SemPLeS/semples3_0.02_0.05/voc/attn-patchrefine-npy-ms_unnormalized/{img_id}.npy', allow_pickle=True)
+        cam_dict = np.load(f'/home/vllcslinv100/repos/SemPLeS/semples3_0.02_0.05/voc/attn-patchrefine-npy-ms/{img_id}.npy', allow_pickle=True)
         cam_dict = cam_dict.item()
 
         cam_ls = []

@@ -17,7 +17,7 @@ cfg.rslt_dir = ...
 cfg.dt.ini.split = 'train_aug'
 
 # * 配置CAM路径。
-cfg.cam.dir = 'experiment/VOC/seg/infer/final/cam'
+cfg.cam.dir = 'experiment/VOC/seg/infer/final/affx2,at_cam,attx1,·5thresh/cam_affed'
 
 # * 配置替补种子点路径。
 cfg.seed.dir = None
