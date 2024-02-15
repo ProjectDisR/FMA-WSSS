@@ -80,7 +80,7 @@ class IoUMetric(BaseMetric):
             
             print(pred_label.shape)
             print(pred_label.dtype)
-            print(pred_label)
+            print(pred_label.min(), pred_label.min())
             
             basename = osp.splitext(osp.basename(
                 data_sample['img_path']))[0]
@@ -88,6 +88,10 @@ class IoUMetric(BaseMetric):
             pred_label = Image.open(png_filename)
             pred_label = np.array(pred_label.getdata())
             pred_label = torch.from_numpy(pred_label).cuda()
+            
+            print(pred_label.shape)
+            print(pred_label.dtype)
+            print(pred_label.min(), pred_label.min())
             
             
             # format_only always for test dataset without ground truth
