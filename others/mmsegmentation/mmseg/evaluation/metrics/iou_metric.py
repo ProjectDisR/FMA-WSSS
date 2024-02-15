@@ -78,20 +78,15 @@ class IoUMetric(BaseMetric):
         for data_sample in data_samples:
             pred_label = data_sample['pred_sem_seg']['data'].squeeze()
             
-            print(pred_label.shape)
-            print(pred_label.dtype)
-            print(pred_label.min(), pred_label.min())
+            
             
             basename = osp.splitext(osp.basename(
                 data_sample['img_path']))[0]
             png_filename = osp.join('../../experiment/others/mmseg/m2f-sl22-bt4-80k-512x-VOC_semples/infer/best,ss/masks/', f'{basename}.png')
             pred_label = Image.open(png_filename)
-            pred_label = np.array(pred_label.getdata())
+            pred_label = np.array(pred_label)
             pred_label = torch.from_numpy(pred_label).cuda()
             
-            print(pred_label.shape)
-            print(pred_label.dtype)
-            print(pred_label.min(), pred_label.min())
             
             
             # format_only always for test dataset without ground truth
