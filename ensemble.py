@@ -28,7 +28,7 @@ for npz_name in npz_name_ls:
     prob_ls = []
 
     key_ls.append(0)
-    prob_ls.append(fma_npz[0]*a + semples_npz[0]*(1.0-a))
+    prob_ls.append(fma_npz['prob'][0]*a + semples_npz['prob'][0]*(1.0-a))
 
 
     for key in range(1, 21):
