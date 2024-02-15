@@ -15,6 +15,10 @@ a = 1.0
 
 
 
+os.makedirs('experiment/others/mmseg/m2f-sl22-bt4-80k-512x-VOC_ensemble/infer/best,ss/seg_preds/')
+
+
+
 npz_name_ls = os.listdir('experiment/others/mmseg/m2f-sl22-bt4-80k-512x-VOC/infer/best,ss/seg_preds/')
 
 for npz_name in npz_name_ls:
@@ -61,5 +65,4 @@ for npz_name in npz_name_ls:
     keys = np.array(key_ls)
     prob = np.stack(prob_ls, axis=0)
 
-    os.makedirs('experiment/others/mmseg/m2f-sl22-bt4-80k-512x-VOC_ensemble/infer/best,ss/seg_preds/')
     np.save(os.path.join('experiment/others/mmseg/m2f-sl22-bt4-80k-512x-VOC_ensemble/infer/best,ss/seg_preds/', npz_name.split('.')[0]+'.npy'), {"prob": prob, "keys": keys})
