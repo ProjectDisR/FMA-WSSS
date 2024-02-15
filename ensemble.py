@@ -48,5 +48,5 @@ for npz_name in npz_name_ls:
             mask[cls_] = mask[cls_] + (1.0-a)*semples_prob
 
 
-    mask = mask.argmax(dim=0).astype(np.uint8)
+    mask = mask.argmax(axis=0).astype(np.uint8)
     arr2PIL(mask).save(os.path.join('experiment/others/mmseg/m2f-sl22-bt4-80k-512x-VOC_ensemble/infer/best,ss/masks/', npz_name.split('.')[0]+'.png'))
