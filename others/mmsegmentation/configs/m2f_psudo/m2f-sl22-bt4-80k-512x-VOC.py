@@ -1,5 +1,5 @@
 _base_ = [
-    '../_base_/default_runtime.py', '../_base_/datasets/pascal_voc12_aug_seed.py'
+    '../_base_/default_runtime.py', '../_base_/datasets/pascal_voc12_aug_seed_test.py'
 ]
 
 pretrained = 'https://download.openmmlab.com/mmsegmentation/v0.5/pretrain/swin/swin_large_patch4_window12_384_22k_20220412-6580f57d.pth'  # noqa
