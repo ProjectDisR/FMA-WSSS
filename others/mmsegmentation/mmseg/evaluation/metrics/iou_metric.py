@@ -82,7 +82,7 @@ class IoUMetric(BaseMetric):
             
             # basename = osp.splitext(osp.basename(
             #     data_sample['img_path']))[0]
-            # png_filename = osp.join('../../experiment/others/mmseg/m2f-sl22-bt4-80k-512x-VOC_ensemble/infer/best,ss/masks/', f'{basename}.png')
+            # png_filename = osp.join('../../experiment/others/mmseg/m2f-sl22-bt4-100k-512x-COCO_ensemble/infer/best,ss/masks/', f'{basename}.png')
             # pred_label = Image.open(png_filename)
             # pred_label = np.array(pred_label)
             # pred_label = torch.from_numpy(pred_label).cuda()
