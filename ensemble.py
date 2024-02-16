@@ -15,7 +15,7 @@ from alchemy_cat.data.plugins import arr2PIL
 
 
 
-a = 0.9
+a = 0.8
 
 
 
