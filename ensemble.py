@@ -24,11 +24,11 @@ os.makedirs('experiment/others/mmseg/m2f-sl22-bt4-80k-512x-VOC_ensemble/infer/be
 
 
 
-npz_name_ls = os.listdir('experiment/others/mmseg/m2f-sl22-bt4-80k-512x-VOC_fma/infer/best,ss/seg_preds/')
+npz_name_ls = os.listdir('experiment/others/mmseg/m2f-sl22-bt4-80k-512x-VOC/infer/best,ss/seg_preds/')
 
 for npz_name in npz_name_ls:
 
-    fma_npz = np.load(os.path.join('experiment/others/mmseg/m2f-sl22-bt4-80k-512x-VOC_fma/infer/best,ss/seg_preds/', npz_name))
+    fma_npz = np.load(os.path.join('experiment/others/mmseg/m2f-sl22-bt4-80k-512x-VOC/infer/best,ss/seg_preds/', npz_name))
     semples_npz = np.load(os.path.join('experiment/others/mmseg/m2f-sl22-bt4-80k-512x-VOC_semples/infer/best,ss/seg_preds/', npz_name))
 
 
