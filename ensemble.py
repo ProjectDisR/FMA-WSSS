@@ -3,13 +3,49 @@ import os
 
 
 import numpy as np
-
+from PIL import Image
 
 
 
 from alchemy_cat.data.plugins import arr2PIL
 
 
+
+
+
+
+def colorful(out, name):
+    arr = out.astype(np.uint8)
+    im = Image.fromarray(arr)
+
+    palette = []
+    for i in range(256):
+        palette.extend((i, i, i))
+    palette[:3 * 21] = np.array([[0, 0, 0],
+                                 [128, 0, 0],
+                                 [0, 128, 0],
+                                 [128, 128, 0],
+                                 [0, 0, 128],
+                                 [128, 0, 128],
+                                 [0, 128, 128],
+                                 [128, 128, 128],
+                                 [64, 0, 0],
+                                 [192, 0, 0],
+                                 [64, 128, 0],
+                                 [192, 128, 0],
+                                 [64, 0, 128],
+                                 [192, 0, 128],
+                                 [64, 128, 128],
+                                 [192, 128, 128],
+                                 [0, 64, 0],
+                                 [128, 64, 0],
+                                 [0, 192, 0],
+                                 [128, 192, 0],
+                                 [0, 64, 128]
+                                 ], dtype='uint8').flatten()
+
+    im.putpalette(palette)
+    im.save(name)
 
 
 
@@ -49,7 +85,7 @@ for npz_name in npz_name_ls:
 
 
     mask = mask.argmax(axis=0).astype(np.uint8)
-    arr2PIL(mask).save(os.path.join('experiment/others/mmseg/m2f-sl22-bt4-80k-512x-VOC_ensemble/infer/best,ss/masks/', npz_name.split('.')[0]+'.png'))
+    colorful(mask, os.path.join('experiment/others/mmseg/m2f-sl22-bt4-80k-512x-VOC_ensemble/infer/best,ss/masks/', npz_name.split('.')[0]+'.png'))
     
     
     
