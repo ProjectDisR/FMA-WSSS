@@ -110,26 +110,26 @@ npz_name_ls = os.listdir('experiment/others/mmseg/m2f-sl22-bt4-100k-512x-COCO/in
 
 for npz_name in npz_name_ls[2000:]:
 
-    fma_npz = np.load(os.path.join('experiment/others/mmseg/m2f-sl22-bt4-100k-512x-COCO/infer/best,ss/seg_preds/', npz_name))
-    # semples_npz = np.load(os.path.join('experiment/others/mmseg/m2f-sl22-bt4-100k-512x-COCO_semples/infer/best,ss/seg_preds/', npz_name))
+    # fma_npz = np.load(os.path.join('experiment/others/mmseg/m2f-sl22-bt4-100k-512x-COCO/infer/best,ss/seg_preds/', npz_name))
+    semples_npz = np.load(os.path.join('experiment/others/mmseg/m2f-sl22-bt4-100k-512x-COCO_semples/infer/best,ss/seg_preds/', npz_name))
 
 
 
     # mask = np.zeros((81, fma_npz['prob'][0].shape[0], fma_npz['prob'][0].shape[1]))
     # mask[0] = mask[0] + a*fma_npz['prob'][0] + (1.0-a)*semples_npz['prob'][0]
     
-    print(fma_npz['fg_cls'])
-    print(fma_npz['prob'].shape)
+    print(semples_npz['fg_cls'])
+    print(semples_npz['prob'].shape)
 
 
     for cls_ in range(1, 81):
 
-        if cls_ in fma_npz['fg_cls']+1:
-            fma_prob = fma_npz['prob'][np.where(fma_npz['fg_cls']+1==cls_)[0][0]+1]
+        # if cls_ in fma_npz['fg_cls']+1:
+        #     fma_prob = fma_npz['prob'][np.where(fma_npz['fg_cls']+1==cls_)[0][0]+1]
             # mask[cls_] = mask[cls_] + a*fma_prob
 
-        # if cls_ in semples_npz['fg_cls']+1:
-        #     semples_prob = semples_npz['prob'][np.where(semples_npz['fg_cls']+1==cls_)[0][0]+1]
+        if cls_ in semples_npz['fg_cls']+1:
+            semples_prob = semples_npz['prob'][np.where(semples_npz['fg_cls']+1==cls_)[0][0]+1]
         #     mask[cls_] = mask[cls_] + (1.0-a)*semples_prob
 
 
