@@ -108,7 +108,7 @@ os.makedirs('experiment/others/mmseg/m2f-sl22-bt4-100k-512x-COCO_ensemble/infer/
 
 npz_name_ls = os.listdir('experiment/others/mmseg/m2f-sl22-bt4-100k-512x-COCO/infer/best,ss/seg_preds/')
 
-for npz_name in npz_name_ls:
+for npz_name in npz_name_ls[2000:]:
 
     fma_npz = np.load(os.path.join('experiment/others/mmseg/m2f-sl22-bt4-100k-512x-COCO/infer/best,ss/seg_preds/', npz_name))
     # semples_npz = np.load(os.path.join('experiment/others/mmseg/m2f-sl22-bt4-100k-512x-COCO_semples/infer/best,ss/seg_preds/', npz_name))
