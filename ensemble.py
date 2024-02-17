@@ -117,12 +117,12 @@ for npz_name in npz_name_ls:
 
     mask = np.zeros((81, fma_npz['prob'][0].shape[0], fma_npz['prob'][0].shape[1]))
     mask[0] = mask[0] + a*fma_npz['prob'][0] + (1.0-a)*semples_npz['prob'][0]
+    
+    print(fma_npz['fg_cls'])
+    print(fma_npz['prob'].shape)
 
 
     for cls_ in range(1, 81):
-        
-        print(fma_npz['fg_cls'])
-        print(fma_npz['prob'].shape)
 
         if cls_ in fma_npz['fg_cls']+1:
             fma_prob = fma_npz['prob'][np.where(fma_npz['fg_cls']+1==cls_)[0][0]+1]
